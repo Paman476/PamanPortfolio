@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paman Netani | Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paman Netani | Cyber Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -20,8 +20,10 @@
 </header>
 
 <!-- HERO -->
-<section id="hero" class="hero">
-  <img src="profile.jpg" alt="Profile" class="profile-img" />
+<section id="hero" class="section hero-boxed">
+  <div class="scanlines"></div>
+  <img src="https://media.licdn.com/dms/image/v2/D4D03AQEr4qkE7HdpGQ/profile-displayphoto-scale_400_400/B4DZqiidBgHwAk-/0/1763663547243?e=1766016000&v=beta&t=-BECBpnMQnTKE39OSxpkH8GKutScVwqb8Ch9tFfWk9w" 
+       alt="Profile" class="profile-img">
   <h1 class="hero-title glow">Hi, I'm <span class="highlight">Paman Netani</span></h1>
   <p class="hero-subtitle fade">Cyber Security Student</p>
   <p class="cyber-tag"></p>
@@ -32,7 +34,7 @@
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="section">
+<section id="projects" class="section projects-boxed">
   <h2 class="section-title">Projects</h2>
   <div class="projects">
     <div class="project-card fade-up">
@@ -55,7 +57,7 @@
 </section>
 
 <!-- SKILLS -->
-<section id="skills" class="section">
+<section id="skills" class="section skills-boxed">
   <h2 class="section-title">Cyber Security Skills</h2>
   <div class="badges">
     <span class="badge">Penetration Testing</span>
@@ -70,11 +72,11 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section">
+<section id="contact" class="section contact-boxed">
   <h2 class="section-title">Contact Me</h2>
   <form id="contactForm" class="contact-form">
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
     <textarea placeholder="Your Message" required></textarea>
     <button type="submit" class="btn glossy">Send Message</button>
   </form>
@@ -86,20 +88,5 @@
 </div>
 
 <script src="script.js"></script>
-<script>
-// TERMINAL TYPING EFFECT
-const text = "Cyber Security Student";
-let index = 0;
-function typeCyber() {
-  if(index < text.length){
-    document.querySelector(".cyber-tag").textContent += text.charAt(index);
-    index++;
-    setTimeout(typeCyber, 80);
-  }
-}
-window.onload = () => {
-  typeCyber();
-};
-</script>
 </body>
 </html>
