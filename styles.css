@@ -1,32 +1,42 @@
 /* RESET */
 * { margin:0; padding:0; box-sizing:border-box; font-family:Poppins,Arial; }
 
-/* BODY & CYBER GRID */
-body {
-  background:#0d0d0d; color:white; overflow-x:hidden;
-  background-image: linear-gradient(rgba(0,255,255,0.07) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,255,255,0.07) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-body::after {
-  content:"";
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  pointer-events:none;
-  background: repeating-linear-gradient(to bottom, rgba(0,255,255,0.03) 0px, rgba(0,255,255,0.03) 2px, transparent 3px, transparent 6px);
-  z-index:999;
-}
+/* BODY */
+body { background:#0d0d0d; color:white; overflow-x:hidden; }
 
 /* HEADER */
 .header { width:100%; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; background: rgba(10,10,10,0.6); backdrop-filter: blur(10px); position:fixed; top:0; z-index:999; }
 .header a { margin-left:20px; text-decoration:none; color:#fff; transition:0.3s; }
 .header a:hover { color:#00a8ff; }
 
+/* BOXED SECTIONS */
+.hero-boxed, .projects-boxed, .skills-boxed, .contact-boxed {
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 40px 30px;
+  margin: 30px auto;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  max-width: 1000px;
+  transition: 0.5s;
+}
+.hero-boxed:hover, .projects-boxed:hover, .skills-boxed:hover, .contact-boxed:hover {
+  box-shadow: 0 0 45px rgba(0, 255, 255, 0.35);
+}
+
+/* SCANLINES HERO EFFECT */
+.scanlines {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background: repeating-linear-gradient(transparent, rgba(0,255,255,0.05) 1px);
+  pointer-events:none;
+  z-index:0;
+}
+
 /* HERO */
-.hero { text-align:center; padding-top:150px; padding-bottom:120px; }
-.profile-img { width:170px; height:170px; border-radius:50%; object-fit:cover; border:4px solid #00aaff; box-shadow:0 0 25px #00aaff,0 0 50px #007acc inset; animation:glowPulse 3s infinite linear; }
-.hero-title { margin-top:25px; font-size:2.8rem; }
+.profile-img { width:170px; height:170px; border-radius:50%; object-fit:cover; border:4px solid #00aaff; box-shadow:0 0 25px #00aaff,0 0 50px #007acc inset; animation:glowPulse 3s infinite linear; margin-bottom:15px; }
+.hero-title { margin-top:15px; font-size:2.5rem; position:relative; z-index:1; }
 .highlight { color:#00c3ff; }
-.hero-subtitle { opacity:0; animation:fadeIn 1.8s ease forwards; }
+.hero-subtitle { opacity:1; font-size:1.2rem; margin-top:5px; }
 .cyber-tag { margin-top:8px; font-size:1.1rem; color:#00ffb3; letter-spacing:1px; text-shadow:0 0 10px #00ffcc; animation:neonBlink 2s infinite alternate; }
 
 /* BUTTONS */
@@ -36,38 +46,19 @@ body::after {
 .glossy-outline { border:2px solid #00aaff; color:#00d0ff;}
 .glossy-outline:hover { background: rgba(0,170,255,0.15); }
 
-/* SECTIONS */
-.section { padding:70px 40px; }
-
 /* PROJECT CARDS */
 .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; }
-.project-card {
-  padding:25px; border-radius:12px; border:1px solid #222; 
-  transition:0.3s; transform-style:preserve-3d; perspective:800px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 30px rgba(0,255,255,0.2) inset;
-  color:white;
-}
-
-/* Alternate Neon Colors for cards */
-.project-card:nth-child(1) { background: rgba(0,255,255,0.1); }
-.project-card:nth-child(2) { background: rgba(255,0,255,0.1); }
-.project-card:nth-child(3) { background: rgba(0,255,0,0.1); }
-
-.project-card:hover { transform:rotateY(7deg) rotateX(5deg) scale(1.03); box-shadow:0 0 30px rgba(0,255,255,0.5),0 0 50px rgba(0,255,255,0.3) inset; }
-
+.project-card { padding:25px; border-radius:12px; border:1px solid #222; background:#101010; box-shadow:0 0 15px rgba(0,150,255,0.15); transition:0.3s; transform-style:preserve-3d; perspective:800px; }
+.project-card:hover { transform:rotateY(7deg) rotateX(5deg); box-shadow:0 0 35px rgba(0,200,255,0.5); }
 .link { display:block; margin-top:10px; text-decoration:none; color:#00c3ff; }
 
 /* BADGES */
-.badges { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:20px; 
-         background: linear-gradient(135deg, rgba(0,255,180,0.2), rgba(255,0,255,0.1)); 
-         border-radius:12px; padding:20px; box-shadow: 0 0 20px rgba(0,255,255,0.3); }
+.badges { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:20px; background: rgba(0,0,0,0.2); border-radius:12px; border:1px solid #ff00ff; padding:20px; box-shadow:0 0 20px rgba(255,0,255,0.3); }
 .badge { padding:10px 20px; border-radius:50px; background: rgba(0,255,180,0.15); border:1px solid #00ffcc; color:#00ffcc; font-size:0.9rem; backdrop-filter:blur(5px); text-shadow:0 0 5px #00ffcc; transition:0.3s; }
-.badge:hover { transform:scale(1.15); box-shadow:0 0 20px #00ffcc, 0 0 35px #00ffaa inset; }
+.badge:hover { transform:scale(1.15); box-shadow:0 0 25px #00ffcc, 0 0 40px #00ffaa inset; }
 
 /* CONTACT FORM */
-.contact-form { max-width:450px; margin:auto; display:flex; flex-direction:column; 
-               background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); 
-               border-radius:12px; padding:25px; box-shadow:0 0 20px rgba(0,255,255,0.3),0 0 40px rgba(255,0,255,0.2) inset; }
+.contact-form { max-width:450px; margin:auto; display:flex; flex-direction:column; background: rgba(0,0,0,0.2); border:1px solid #00ffff; border-radius:12px; padding:25px; box-shadow:0 0 25px rgba(0,255,255,0.35);}
 .contact-form input, .contact-form textarea { margin:10px 0; padding:12px; background:#111; border:1px solid #00ffcc; color:white; border-radius:8px; }
 
 /* POPUP */
@@ -76,7 +67,6 @@ body::after {
 
 /* ANIMATIONS */
 @keyframes glowPulse {0%{box-shadow:0 0 25px #00aaff;}50%{box-shadow:0 0 45px #00d0ff;}100%{box-shadow:0 0 25px #00aaff;}}
-@keyframes fadeIn {to{opacity:1;}}
-@keyframes neonBlink {0%{opacity:0.7;text-shadow:0 0 6px #00ffaa;}100%{opacity:1;text-shadow:0 0 18px #00ffcc;}}
 @keyframes fadeUp { to { opacity:1; transform: translateY(0);} }
 .fade-up { opacity:0; transform: translateY(30px); animation: fadeUp 1.3s forwards;}
+@keyframes neonBlink {0%{opacity:0.7;text-shadow:0 0 6px #00ffaa;}100%{opacity:1;text-shadow:0 0 18px #00ffcc;}}
