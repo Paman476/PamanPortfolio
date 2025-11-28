@@ -22,7 +22,6 @@
 <!-- HERO -->
 <section id="hero" class="hero">
   <img src="profile.jpg" alt="Profile" class="profile-img" />
-
   <h1 class="hero-title glow">Hi, I'm <span class="highlight">Paman Netani</span></h1>
   <p class="hero-subtitle fade">Cyber Security Student</p>
   <p class="cyber-tag"></p>
@@ -87,5 +86,20 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+// TERMINAL TYPING EFFECT
+const text = "Cyber Security Student";
+let index = 0;
+function typeCyber() {
+  if(index < text.length){
+    document.querySelector(".cyber-tag").textContent += text.charAt(index);
+    index++;
+    setTimeout(typeCyber, 80);
+  }
+}
+window.onload = () => {
+  typeCyber();
+};
+</script>
 </body>
 </html>
