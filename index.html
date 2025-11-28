@@ -26,7 +26,7 @@
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
     <div class="header-actions">
-      <a class="btn ghost" href="assets/Paman_Netani_Resume.pdf" download>Download Resume</a>
+      <a class="btn ghost" href="Paman_Netani_Resume.pdf" download>Download Resume</a>
       <button id="theme-toggle" title="Toggle theme">🌙</button>
     </div>
   </div>
@@ -39,15 +39,17 @@
       <div class="hero-left">
         <h1>Hi, I'm <span class="glow">Paman</span></h1>
         <p class="subtitle">Cybersecurity Student • Google Cybersecurity Certified Professional</p>
+
         <p class="type-line" id="typeLine"></p>
         <div class="hero-actions">
           <a class="btn" href="#projects">View My Work</a>
-          <a class="btn ghost" href="assets/profile.jpg" download>Download Photo</a>
+          <a class="btn ghost" href="profile.jpg" download>Download Photo</a>
         </div>
       </div>
+
       <div class="hero-right">
         <div class="avatar-wrap">
-          <img src="assets/profile.jpg" alt="Paman profile" class="avatar">
+          <img src="profile.jpg" alt="Paman profile" class="avatar">
           <div class="avatar-glow"></div>
         </div>
       </div>
@@ -114,13 +116,11 @@
     </div>
   </section>
 
-  <!-- CONTACT (Netlify Forms enabled) -->
+  <!-- CONTACT -->
   <section id="contact" class="section">
     <h2 class="section-title">Contact</h2>
     <div class="contact container">
-      <!-- Netlify form: keep name="contact" and data-netlify attr -->
       <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true" onsubmit="return handleContact(event)">
-        <!-- required hidden input for Netlify to parse -->
         <input type="hidden" name="form-name" value="contact">
         <input type="text" id="name" name="name" placeholder="Your name" required>
         <input type="email" id="email" name="email" placeholder="Your email" required>
@@ -139,23 +139,22 @@
 <footer><div class="container">© 2025 Paman Netani • Premium Portfolio</div></footer>
 
 <script src="script.js"></script>
+
 <script>
-/* tsParticles setup */
 tsParticles.load("tsparticles", {
-  "particles": {
-    "number": {"value": 60},
-    "color": {"value": ["#00eaff", "#66fcf1"]},
-    "shape": {"type": "circle"},
-    "opacity": {"value": 0.12},
-    "size": {"value": 3},
-    "move": {"enable": true, "speed": 1.5}
+  particles: {
+    number: { value: 60 },
+    color: { value: ["#00eaff", "#66fcf1"] },
+    shape: { type: "circle" },
+    opacity: { value: 0.12 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1.5 }
   },
-  "interactivity": {
-    "events": {
-      "onhover": {"enable": true, "mode": "repulse"}
-    }
+  interactivity: {
+    events: { onhover: { enable: true, mode: "repulse" } }
   }
 });
 </script>
+
 </body>
 </html>
