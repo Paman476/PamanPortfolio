@@ -1,95 +1,89 @@
-// typing effect & small animations
-document.addEventListener('DOMContentLoaded', function(){
-  // typing effect
-  const phrases = ['Network Security','Ethical Hacking','Vulnerability Analysis','Security Automation'];
-  let i = 0, pos = 0, forward = true;
-  const el = document.getElementById('typeLine');
+// Typewriter-like rotating phrases + small UI behaviors
+document.addEventListener('DOMContentLoaded', ()=> {
+  // animate hero title glow using anime.js
+  anime({
+    targets: '.glow',
+    scale: [0.94,1],
+    opacity: [0.6,1],
+    duration: 1600,
+    easing: 'easeOutElastic(1, .6)'
+  });
 
-  function step(){
-    const word = phrases[i];
-    if(!el) return;
-    if(forward){
-      pos++;
-      el.textContent = word.slice(0,pos);
-      if(pos === word.length){ forward=false; setTimeout(step,900); return; }
-    } else {
-      pos--;
-      el.textContent = word.slice(0,pos);
-      if(pos === 0){ forward=true; i=(i+1)%phrases.length; }
-    }
-    setTimeout(step,80);
+  // small type effect (simple)
+  const phrases = ['Pentesting', 'Network Security', 'Python Scripting', 'Bug Hunting'];
+  let idx = 0;
+  const typeLine = document.getElementById('typeLine');
+  function typeOut(text, cb){
+    let i=0; typeLine.textContent = '';
+    const t = setInterval(()=>{ typeLine.textContent += text[i++] || ''; if(i>text.length){ clearInterval(t); setTimeout(cb,900); }}, 45);
   }
-  step();
+  function loopPhrases(){
+    typeOut(phrases[idx], ()=>{ idx = (idx+1)%phrases.length; setTimeout(loopPhrases, 600); });
+  }
+  loopPhrases();
 
-  // animate progress bars when visible
-  const bars = document.querySelectorAll('.bar');
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        const bar = entry.target;
-        const lvl = bar.getAttribute('data-level');
-        bar.style.width = lvl + '%';
-      }
-    });
-  }, {threshold:0.5});
-  bars.forEach(b=>obs.observe(b));
+  // animate progress bars
+  document.querySelectorAll('.bar').forEach(b=>{
+    const level = parseInt(b.getAttribute('data-level')||'60',10);
+    setTimeout(()=> b.style.width = level + '%', 600);
+  });
 
-  // scroll spy for nav links
-  const sections = document.querySelectorAll('main section, header');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const spy = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting && entry.target.id){
-        navLinks.forEach(a=>a.classList.remove('active'));
-        const link = document.querySelector('.nav-link[href="#'+entry.target.id+'"]');
-        if(link) link.classList.add('active');
-      }
-    });
-  }, {threshold:0.5});
-  sections.forEach(s=>spy.observe(s));
-
-  // theme toggle
+  // theme toggle (light/dark simple)
   const themeBtn = document.getElementById('theme-toggle');
-  themeBtn.addEventListener('click', ()=> {
-    document.body.classList.toggle('light');
-    if(document.body.classList.contains('light')) themeBtn.textContent = '🌞';
-    else themeBtn.textContent = '🌙';
+  themeBtn && themeBtn.addEventListener('click', ()=>{
+    document.body.classList.toggle('light-mode');
+  });
+
+  // tsParticles digital neon config
+  tsParticles.load("tsparticles", {
+    fullScreen: { enable: false },
+    detectRetina: true,
+    particles: {
+      number: { value: 60, density: { enable: true, area: 900 } },
+      color: { value: ["#00eaff", "#66fcf1"] },
+      shape: { type: "circle" },
+      opacity: { value: 0.14, random: { enable: true, minimumValue: 0.06 } },
+      size: { value: { min: 1.2, max: 3.6 } },
+      move: { enable: true, speed: 1.8, outModes: { default: "out" }, trail: { enable: true, length: 6, fillColor: "#000" } },
+      links: { enable: true, distance: 140, color: "#00eaff", opacity: 0.08, width: 1 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "grab" },
+        onclick: { enable: true, mode: "repulse" }
+      },
+      modes: {
+        grab: { distance: 160, links: { opacity: 0.12 } },
+        repulse: { distance: 120 }
+      }
+    },
+    background: { color: "" },
+    retina_detect: true
+  });
+
+  // subtle avatar pulse using CSS + JS for stagger
+  const avatar = document.querySelector('.avatar');
+  if(avatar){
+    avatar.style.transition = 'transform 1.2s ease-in-out';
+    setInterval(()=> { avatar.style.transform = 'scale(1.02)'; setTimeout(()=> avatar.style.transform='scale(1)', 700); }, 3500);
+  }
+
+  // smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const href = a.getAttribute('href');
+      if(href.startsWith('#')) {
+        e.preventDefault();
+        const el = document.querySelector(href);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
   });
 });
 
-// contact form handler: Netlify will intercept POST; we keep a JS fallback for immediate feedback
+// Netlify contact handler fallback (optional)
 function handleContact(e){
-  // If Netlify will handle the form via POST, let it submit normally.
-  // But we intercept to show a quick message and prevent redirect when JavaScript is present.
-  e.preventDefault();
-
-  const form = e.target;
-  const data = new FormData(form);
-
-  // Try to submit via `fetch` to Netlify Forms endpoint (same origin)
-  fetch("/", {
-    method: "POST",
-    body: data
-  }).then(res => {
-    if(res.ok) {
-      alert("Message sent — thank you! I'll reply soon.");
-      form.reset();
-    } else {
-      // fallback to mailto if fetch fails
-      fallbackMailto();
-    }
-  }).catch(err => {
-    fallbackMailto();
-  });
-
-  return false;
-}
-
-function fallbackMailto(){
-  const name = document.getElementById('name').value || 'Visitor';
-  const email= document.getElementById('email').value || '';
-  const message = document.getElementById('message').value || '';
-  const subject = encodeURIComponent('Portfolio message from ' + name);
-  const body = encodeURIComponent('Name: '+name+'\\nEmail: '+email+'\\n\\n'+message);
-  window.location.href = 'mailto:pamannetani@example.com?subject='+subject+'&body='+body;
+  // Netlify will handle the POST; for UX we can show a quick alert
+  // Prevent double submit on JS-only demo
+  return true;
 }
